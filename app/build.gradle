@@ -1,0 +1,26 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.ammorshed.masnunwazifa'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.ammorshed.masnunwazifa"
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+    }
+
+    androidResources {
+        // WebP পেজগুলো আগে থেকেই সংকুচিত, তাই আবার কম্প্রেস করা হবে না
+        noCompress 'webp'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
