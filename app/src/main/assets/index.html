@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>সহীহ মাসনূন ওযীফা</title>
+<style>
+:root{--bg:#1a0f07;--bar:#3a2410;--gold:#e7b03c;--gold2:#c8922a;--txt:#f2e4c8;--dim:#a89272}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--txt);font-family:"Noto Sans Bengali","Kalpurush",sans-serif;overflow:hidden}
+body{display:flex;flex-direction:column}
+
+/* ওপরের হেডার */
+#hdr{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--bar);border-bottom:3px solid var(--gold2);flex:0 0 auto}
+.ibtn{background:none;border:0;color:var(--gold);font-size:28px;line-height:1;padding:4px 8px;cursor:pointer}
+#ttl{flex:1;min-width:0}
+#ttl b{display:block;color:var(--gold);font-size:19px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#ttl small{display:block;color:var(--dim);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#pcount{color:var(--dim);font-size:14px;text-align:right;white-space:nowrap}
+.sig{display:inline-block;background:#d00000;color:#fff;font-size:10px;font-weight:bold;padding:1px 6px;border-radius:3px;margin-top:3px}
+
+/* পেজ দেখানোর জায়গা */
+#stage{flex:1;min-height:0;overflow:auto;display:flex;align-items:center;justify-content:center;padding:12px;position:relative;touch-action:pan-x pan-y}
+#pg{display:block;max-width:100%;max-height:100%;background:#fff;box-shadow:0 0 0 1px #000,0 4px 18px rgba(0,0,0,.6)}
+#stage.zoom{display:block;padding:6px}
+#stage.zoom #pg{max-width:none;max-height:none;width:230%;margin:0 auto}
+body.dark #pg{filter:invert(1) hue-rotate(180deg) brightness(.9)}
+#hint{position:absolute;bottom:2px;left:0;right:0;text-align:center;color:var(--dim);font-size:12px;pointer-events:none;opacity:.8}
+#stage.zoom #hint{display:none}
+
+/* নিচের বার */
+#bar{flex:0 0 auto;display:flex;align-items:center;gap:12px;padding:10px 14px;background:#150c05;border-top:1px solid #3a2410}
+.nav{flex:0 0 auto;width:64px;height:44px;border-radius:22px;border:1px solid var(--gold2);background:#24150a;color:var(--gold);font-size:20px}
+.nav:disabled{opacity:.35}
+#mid{flex:1;min-width:0;text-align:center;color:var(--dim);font-size:14px}
+#rng{width:100%;accent-color:var(--gold);margin:0 0 2px}
+
+/* সূচি */
+#ov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:30;display:none}
+#drw{position:fixed;top:0;bottom:0;left:0;width:82%;max-width:360px;background:#22140a;z-index:31;transform:translateX(-102%);transition:transform .22s;display:flex;flex-direction:column;border-right:3px solid var(--gold2)}
+body.open #ov{display:block}
+body.open #drw{transform:none}
+#dh{padding:14px 14px 10px;background:var(--bar);border-bottom:2px solid var(--gold2)}
+#dh b{color:var(--gold);font-size:19px}
+#go{display:flex;gap:8px;margin-top:10px}
+#go input{flex:1;min-width:0;background:#150c05;border:1px solid var(--gold2);color:var(--txt);border-radius:8px;padding:8px 10px;font-size:15px}
+#go button,#dk{background:var(--gold);color:#2a1706;border:0;border-radius:8px;padding:8px 14px;font-size:15px;font-weight:bold}
+#dk{margin-top:10px;width:100%}
+#toc{flex:1;overflow:auto;padding:6px 0 30px}
+.t{display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid #33200f;color:var(--txt);padding:11px 14px;font-size:15.5px;font-family:inherit}
+.t .n{float:right;color:var(--dim);font-size:13px;margin-left:8px}
+.t.h{color:var(--gold);font-weight:bold;background:#2b1a0c;margin-top:6px}
+.t.l1{padding-left:28px}
+.t.l2{padding-left:44px;font-size:14.5px;color:#d9c8a6}
+.t.cur{outline:2px solid var(--gold2);outline-offset:-2px}
+</style>
+</head>
+<body>
+
+<div id="hdr">
+  <button class="ibtn" id="menu" aria-label="সূচি">&#9776;</button>
+  <div id="ttl">
+    <b>সহীহ মাসনূন ওযীফা</b>
+    <small>ড. খোন্দকার আব্দুল্লাহ জাহাঙ্গীর</small>
+    <span class="sig">@A.M.MORSHED</span>
+  </div>
+  <div id="pcount">পাতা ১<br>/ ৬৬</div>
+</div>
+
+<div id="stage">
+  <img id="pg" alt="পাতা">
+  <div id="hint">&larr; সোয়াইপ করুন &rarr; &nbsp;·&nbsp; জুম করতে ডাবল-ট্যাপ</div>
+</div>
+
+<div id="bar">
+  <button class="nav" id="prev" aria-label="আগের পাতা">&#9664;</button>
+  <div id="mid">
+    <input type="range" id="rng" min="1" max="66" value="1">
+    <div id="lbl">পাতা ১ / ৬৬</div>
+  </div>
+  <button class="nav" id="next" aria-label="পরের পাতা">&#9654;</button>
+</div>
+
+<div id="ov"></div>
+<div id="drw">
+  <div id="dh">
+    <b>সূচিপত্র</b>
+    <div id="go"><input id="gin" type="number" inputmode="numeric" min="1" max="66" placeholder="পাতা নম্বর (১–৬৬)"><button id="gbtn">যান</button></div>
+    <button id="dk">&#9680; রাতের মোড চালু/বন্ধ</button>
+  </div>
+  <div id="toc"></div>
+</div>
+
+<script>
+(function(){
+  var TOTAL = 66;
+  // t: শিরোনাম, p: PDF-এর পাতা নম্বর, k: স্তর (h=পরিচ্ছেদ, 1, 2)
+  var TOC = [
+    {t:"প্রচ্ছদ", p:1, k:"h"},
+    {t:"ভূমিকা", p:4, k:"h"},
+    {t:"সূচিপত্র", p:6, k:"h"},
+
+    {t:"প্রথম পরিচ্ছেদ: ওযীফার আগে", p:8, k:"h"},
+    {t:"(ক) বেলায়াত ও ওলী", p:8, k:1},
+    {t:"(খ) তাযকিয়া বা আত্মশুদ্ধি", p:9, k:1},
+    {t:"(গ) ইহসান বা সৌন্দর্য ও পূর্ণতা", p:11, k:1},
+    {t:"(ঘ) বেলায়াত, তাযকিয়া ও ইহসানের পথ", p:11, k:1},
+    {t:"(ঙ) ইবাদত কবুলের শর্ত", p:12, k:1},
+    {t:"(চ) নফল ইবাদতের গুরুত্ব", p:12, k:1},
+    {t:"(ছ) অবহেলিত কয়েকটি ফরয ও হারাম", p:13, k:1},
+    {t:"পর্দা", p:13, k:2},
+    {t:"সৃষ্টির অধিকার বা পাওনা নষ্ট করা", p:14, k:2},
+    {t:"গীবত বা পরনিন্দা করা বা শোনা", p:14, k:2},
+    {t:"নামীমাহ বা চোগলখুরী", p:15, k:2},
+    {t:"ঝগড়া-তর্ক", p:15, k:2},
+    {t:"(জ) তাযকিয়া বা আত্মশুদ্ধির কিছু কর্ম", p:16, k:1},
+    {t:"বর্জনীয় মানসিক কর্ম", p:16, k:2},
+    {t:"প্রবৃত্তির অনুসরণ ও আত্মতৃপ্তি", p:16, k:2},
+    {t:"অহঙ্কার", p:17, k:2},
+    {t:"হিংসা, বিদ্বেষ ও ঘৃণা", p:18, k:2},
+    {t:"প্রদর্শনেচ্ছা ও সম্মানের আগ্রহ", p:19, k:2},
+    {t:"অকারণ মানসিক ব্যস্ততা", p:20, k:2},
+    {t:"অর্জনীয় মানসিক কর্ম", p:20, k:2},
+    {t:"আল্লাহ ও রাসূলের (ﷺ) মহব্বত", p:20, k:2},
+    {t:"সকল মুমিনের প্রতি মহব্বত ও কল্যাণ কামনা", p:21, k:2},
+    {t:"ধৈর্যধারণ ও সুন্দর আচরণ", p:21, k:2},
+    {t:"আল্লাহর প্রতি সু-ধারণা পোষণ", p:23, k:2},
+    {t:"কৃতজ্ঞতা ও সন্তুষ্টি", p:23, k:2},
+    {t:"নির্লোভতা ও আখিরাতমুখিতা", p:24, k:2},
+
+    {t:"দ্বিতীয় পরিচ্ছেদ: নেক আমলের ওযীফা", p:26, k:"h"},
+    {t:"(ক) ওযীফার পরিচয় ও গুরুত্ব", p:26, k:1},
+    {t:"(খ) নামাযের ওযীফা", p:26, k:1},
+    {t:"সালাতুল্লাইল বা তাহাজ্জুদ", p:27, k:2},
+    {t:"সালাতুদ্দোহা বা চাশত", p:29, k:2},
+    {t:"মাগরিব ও ইশার মধ্যবর্তী নফল সালাত (আওয়াবীন)", p:30, k:2},
+    {t:"তাহিয়্যাতুল ওযূ", p:31, k:2},
+    {t:"তাহিয়্যাতুল মসজিদ ও দুখুলুল মসজিদ", p:31, k:2},
+    {t:"সালাতুত তাসবীহ", p:32, k:2},
+    {t:"সালাতুত তাওবা", p:32, k:2},
+    {t:"সালাতুল ইসতিখারা", p:32, k:2},
+    {t:"(খ) রোযার ওযীফা", p:32, k:1},
+    {t:"(গ) ইলমের ওযীফা", p:33, k:1},
+    {t:"(ঘ) দাওয়াতের ওযীফা", p:34, k:1},
+    {t:"(ঙ) খেদমতে খালকের ওযীফা", p:34, k:1},
+
+    {t:"তৃতীয় পরিচ্ছেদ: যিকরের ওযীফা", p:36, k:"h"},
+    {t:"যিকরের পরিচয় ও গুরুত্ব", p:36, k:1},
+    {t:"প্রথমত: সার্বক্ষণিক বা বেশিবেশি পালনীয় যিকর-ওযীফা", p:37, k:1},
+    {t:"দ্বিতীয়ত: সময় নির্ধারিত যিকর-ওযীফা", p:41, k:1},
+    {t:"(ক) ফজরের ওযীফা", p:41, k:2},
+    {t:"(খ) যোহরের ওযীফা", p:51, k:2},
+    {t:"(গ) আসরের ওযীফা", p:52, k:2},
+    {t:"(ঘ) মাগরিবের ওযীফা", p:52, k:2},
+    {t:"(ঙ) ইশার ওযীফা", p:52, k:2},
+    {t:"(চ) দরূদের ওযীফা", p:52, k:2},
+    {t:"(ছ) মুরাকাবা ও মুহাসাবা", p:53, k:2},
+    {t:"(জ) শয়নের ওযীফা", p:54, k:2},
+    {t:"(ঝ) ঘুম ভাঙার ওযীফা", p:59, k:2},
+
+    {t:"চতুর্থ পরিচ্ছেদ: যিকিরের মাজলিস", p:60, k:"h"},
+    {t:"(ক) মাজলিসে যিকিরের গুরুত্ব", p:60, k:1},
+    {t:"(খ) যিকিরের মাজলিসের পরিচয়", p:61, k:1},
+    {t:"(গ) যিকিরের মাজলিসের যিকির", p:62, k:1},
+    {t:"(ঘ) দরবারে ফুরফুরার তালীমী মাহফিল", p:62, k:1}
+  ];
+
+  var $ = function(id){ return document.getElementById(id); };
+  var BN = "০১২৩৪৫৬৭৮৯";
+  function bn(n){ return String(n).replace(/\d/g, function(d){ return BN[d]; }); }
+  function store(k, v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k, v);}catch(e){ return null; } }
+
+  var cur = 1, zoomed = false;
+  var pg = $('pg'), stage = $('stage'), rng = $('rng');
+
+  function src(n){ return 'pages/' + (n < 10 ? '00' : n < 100 ? '0' : '') + n + '.webp'; }
+  function preload(n){ if(n>=1 && n<=TOTAL){ var i = new Image(); i.src = src(n); } }
+
+  function show(n, keepZoom){
+    n = Math.max(1, Math.min(TOTAL, n|0));
+    cur = n;
+    pg.src = src(n);
+    if(!keepZoom) setZoom(false);
+    stage.scrollTop = 0; stage.scrollLeft = 0;
+    $('pcount').innerHTML = 'পাতা ' + bn(n) + '<br>/ ' + bn(TOTAL);
+    $('lbl').textContent = 'পাতা ' + bn(n) + ' / ' + bn(TOTAL);
+    rng.value = n;
+    $('prev').disabled = (n === 1);
+    $('next').disabled = (n === TOTAL);
+    preload(n+1); preload(n-1);
+    store('page', n);
+    markToc();
+  }
+
+  function setZoom(z){
+    zoomed = z;
+    stage.classList.toggle('zoom', z);
+  }
+
+  /* নেভিগেশন বাটন ও স্লাইডার */
+  $('prev').onclick = function(){ show(cur-1); };
+  $('next').onclick = function(){ show(cur+1); };
+  rng.oninput = function(){ $('lbl').textContent = 'পাতা ' + bn(rng.value) + ' / ' + bn(TOTAL); };
+  rng.onchange = function(){ show(+rng.value); };
+
+  /* সোয়াইপ + ডাবল-ট্যাপ জুম */
+  var sx=0, sy=0, st=0, lastTap=0;
+  stage.addEventListener('touchstart', function(e){
+    if(e.touches.length !== 1) return;
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY; st = Date.now();
+  }, {passive:true});
+  stage.addEventListener('touchend', function(e){
+    var t = e.changedTouches[0];
+    var dx = t.clientX - sx, dy = t.clientY - sy;
+    if(!zoomed && Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.6 && Date.now() - st < 700){
+      show(dx < 0 ? cur + 1 : cur - 1);
+      return;
+    }
+    if(Math.abs(dx) < 10 && Math.abs(dy) < 10){
+      var now = Date.now();
+      if(now - lastTap < 320){
+        setZoom(!zoomed);
+        lastTap = 0;
+      } else { lastTap = now; }
+    }
+  }, {passive:true});
+
+  /* সূচি */
+  function buildToc(){
+    var box = $('toc'), html = '';
+    TOC.forEach(function(it, i){
+      var c = 't ' + (it.k === 'h' ? 'h' : it.k === 1 ? 'l1' : 'l2');
+      html += '<button class="' + c + '" data-i="' + i + '" data-p="' + it.p + '"><span class="n">' + bn(it.p) + '</span>' + it.t + '</button>';
+    });
+    box.innerHTML = html;
+    box.onclick = function(e){
+      var b = e.target.closest('.t'); if(!b) return;
+      show(+b.getAttribute('data-p'));
+      closeDrawer();
+    };
+  }
+  function markToc(){
+    var best = -1, nodes = $('toc').children;
+    for(var i = 0; i < TOC.length; i++){ if(TOC[i].p <= cur) best = i; }
+    for(var j = 0; j < nodes.length; j++) nodes[j].classList.toggle('cur', j === best);
+  }
+  function openDrawer(){
+    document.body.classList.add('open');
+    var c = $('toc').querySelector('.cur');
+    if(c) $('toc').scrollTop = Math.max(0, c.offsetTop - 120);
+  }
+  function closeDrawer(){ document.body.classList.remove('open'); }
+  $('menu').onclick = openDrawer;
+  $('ov').onclick = closeDrawer;
+
+  $('gbtn').onclick = function(){
+    var v = parseInt($('gin').value, 10);
+    if(v >= 1 && v <= TOTAL){ show(v); closeDrawer(); $('gin').value=''; }
+  };
+  $('gin').onkeydown = function(e){ if(e.key === 'Enter') $('gbtn').onclick(); };
+
+  /* রাতের মোড */
+  function setDark(d){ document.body.classList.toggle('dark', d); store('dark', d ? '1' : '0'); }
+  $('dk').onclick = function(){ setDark(!document.body.classList.contains('dark')); };
+
+  /* অ্যান্ড্রয়েড ব্যাক বাটন */
+  window.onBack = function(){
+    if(document.body.classList.contains('open')){ closeDrawer(); return true; }
+    if(zoomed){ setZoom(false); return true; }
+    return false;
+  };
+
+  buildToc();
+  if(store('dark') === '1') setDark(true);
+  var last = parseInt(store('page'), 10);
+  show(last >= 1 && last <= TOTAL ? last : 1);
+})();
+</script>
+</body>
+</html>
